@@ -1,9 +1,15 @@
 import React from 'react';
 import './App.css';
-// oi
+import FilterName from './components/FilterName';
+import Table from './components/Table';
+import Provider from './context/Provider';
+
 function App() {
   return (
-    <span>Hello, App!</span>
+    <Provider>
+      <FilterName />
+      <Table />
+    </Provider>
   );
 }
 
