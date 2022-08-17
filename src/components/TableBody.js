@@ -5,6 +5,7 @@ function TableBody() {
   const { data, filterByName: { name: findPlanet },
     filterByNumericValues,
   } = useContext(Context);
+
   const filteredPlanets = data.filter((planet) => planet.name.toLowerCase()
     .includes(findPlanet.toLowerCase())).filter((column) => filterByNumericValues
     .every((beckenbowers) => {

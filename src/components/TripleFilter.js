@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Context from '../context/Context';
 
 function TripleFilter() {
@@ -16,7 +16,18 @@ function TripleFilter() {
     'rotation_period',
     'surface_water',
   ];
+
   const comparisonFilter = ['maior que', 'menor que', 'igual a'];
+
+  const dereguejhonson = columnFilter.filter((brinbols) => filterByNumericValues
+    .every((xesque) => brinbols !== xesque.column));
+
+  useEffect(() => {
+    setTripleFilter({ ...stateTripleFilter,
+      column: dereguejhonson[0],
+    });
+  }, [filterByNumericValues]);
+
   return (
     <div>
       <label htmlFor="columnFilter">
@@ -30,7 +41,7 @@ function TripleFilter() {
             column: e.target.value,
           }) }
         >
-          {columnFilter.map((item, index) => (
+          {dereguejhonson.map((item, index) => (
             <option key={ index }>{item}</option>
           ))}
         </select>
