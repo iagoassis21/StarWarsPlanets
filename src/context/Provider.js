@@ -6,6 +6,7 @@ import FetchApi from '../services/FetchApi';
 function Provider({ children }) {
   const [data, setData] = useState([]);
   const [findPlanet, setPlanet] = useState('');
+  const [filterByNumericValues, setFilterByNumericValues] = useState([]);
   useEffect(() => {
     const getPlanets = async () => {
       const results = await FetchApi();
@@ -16,8 +17,12 @@ function Provider({ children }) {
 
   const context = {
     data,
-    findPlanet,
     setPlanet,
+    filterByName: {
+      name: findPlanet,
+    },
+    filterByNumericValues,
+    setFilterByNumericValues,
   };
 
   return (

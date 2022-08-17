@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Context from '../context/Context';
 
 export default function FilterName() {
-  const { findPlanet, setPlanet } = useContext(Context);
+  const { filterByName: { name }, setPlanet } = useContext(Context);
   const handleChange = ({ target }) => {
     setPlanet(target.value);
   };
@@ -12,7 +12,7 @@ export default function FilterName() {
         Busque por um planeta:
         <input
           data-testid="name-filter"
-          value={ findPlanet }
+          value={ name }
           onChange={ handleChange }
           type="text"
           name="findPlanet"

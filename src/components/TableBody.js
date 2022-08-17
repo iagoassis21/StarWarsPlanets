@@ -2,9 +2,21 @@ import React, { useContext } from 'react';
 import Context from '../context/Context';
 
 function TableBody() {
-  const { data, findPlanet } = useContext(Context);
-  const filteredPlanets = data.filter((item) => item.name.toLowerCase()
-    .includes(findPlanet.toLowerCase()));
+  const { data, filterByName: { name: findPlanet },
+    filterByNumericValues,
+  } = useContext(Context);
+  const filteredPlanets = data.filter((planet) => planet.name.toLowerCase()
+    .includes(findPlanet.toLowerCase())).filter((column) => filterByNumericValues
+    .every((beckenbowers) => {
+      if (beckenbowers.comparison === 'maior que') {
+        return +column[beckenbowers.column] > +beckenbowers.value;
+      }
+      if (beckenbowers.comparison === 'menor que') {
+        return +column[beckenbowers.column] < +beckenbowers.value;
+      }
+      return +column[beckenbowers.column] === +beckenbowers.value;
+    }));
+
   return (
     <tbody>
       {
