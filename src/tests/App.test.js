@@ -4,18 +4,33 @@ import App from '../App';
 import userEvent from "@testing-library/user-event";
 import testData from '../../cypress/mocks/testData'
 
+beforeEach(() => {
+  jest.spyOn(global, "fetch").mockImplementationOnce(() =>
+    Promise.resolve({
+      json: () => Promise.resolve(testData),
+    })
+  );
+});
+afterEach(() => {
+  jest.resetAllMocks();
+});
+
 describe('I am your test', () => {
 
   it('', async ()=>{
     render(<App />);
+
+    await waitFor(() => expect(fetch).toHaveBeenCalled() );
 
     const planetSearch =  screen.getByRole('textbox', {  name: /busque por um planeta:/i})
     userEvent.type(planetSearch, 'tato')
     expect(planetSearch).toHaveProperty('value', 'tato')
   })
 
-  it('', ()=>{
+  it('', async ()=>{
     render(<App />);
+
+    await waitFor(() => expect(fetch).toHaveBeenCalled() );
 
     const filterBtn = screen.getByRole('button', {  name: /filtrar/i});
     const deleteBtn = screen.getByRole('button', {  name: /deletar filtros/i})
@@ -25,6 +40,8 @@ describe('I am your test', () => {
 
   it('', async ()=>{
     render(<App />);
+
+    await waitFor(() => expect(fetch).toHaveBeenCalled() );
 
     const numberFilter = screen.getByTestId('value-filter')
     const filterBtn = screen.getByRole('button', {  name: /filtrar/i});
@@ -45,8 +62,10 @@ describe('I am your test', () => {
     expect( await screen.findAllByTestId('planet-name')).toHaveLength(1)
   })
 
-  it('', ()=>{
+  it('', async ()=>{
     render(<App />);
+
+    await waitFor(() => expect(fetch).toHaveBeenCalled() );
 
     const columnFilter = screen.getByRole('combobox', {  name: /coluna/i})
     userEvent.selectOptions(screen.getByRole('combobox', {  name: /coluna/i}), ['diameter'])
@@ -54,8 +73,10 @@ describe('I am your test', () => {
 
   })
 
-  it('', ()=>{
+  it('', async ()=>{
     render(<App />);
+
+    await waitFor(() => expect(fetch).toHaveBeenCalled() );
 
     const column = screen.getByTestId('column-filter');
     const columns = ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
@@ -68,6 +89,8 @@ describe('I am your test', () => {
 
   it('', async ()=>{
     render(<App />);
+
+    await waitFor(() => expect(fetch).toHaveBeenCalled() );
 
     const ascBtn = screen.getByRole('radio', {  name: /asc/i});
     const dscBtn = screen.getByRole('radio', {  name: /dsc/i});
@@ -84,6 +107,8 @@ describe('I am your test', () => {
 
   it('', async ()=>{
     render(<App />);
+
+    await waitFor(() => expect(fetch).toHaveBeenCalled() );
 
     const orderColumnFilter = screen.getByRole('combobox', {  name: /ordenar/i})
     userEvent.selectOptions(screen.getByRole('combobox', {  name: /ordenar/i}), ['diameter'])
