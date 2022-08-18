@@ -25,12 +25,14 @@ function TripleFilter() {
   useEffect(() => {
     setTripleFilter({ ...stateTripleFilter,
       column: dereguejhonson[0],
+      value: '0',
     });
   }, [filterByNumericValues]);
 
   return (
     <div>
       <label htmlFor="columnFilter">
+        Coluna
         <select
           id="columnFilter"
           data-testid="column-filter"
@@ -47,6 +49,7 @@ function TripleFilter() {
         </select>
       </label>
       <label htmlFor="comparisonFilter">
+        Operador
         <select
           id="comparisonFilter"
           data-testid="comparison-filter"
@@ -82,7 +85,7 @@ function TripleFilter() {
           [...filterByNumericValues, stateTripleFilter],
         ) }
       >
-        Clique
+        Filtrar
       </button>
     </div>
   );

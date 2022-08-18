@@ -27,7 +27,7 @@ export default function ActiveFilters() {
                   .filter(({ column: xesque }) => column !== xesque));
               } }
             >
-              Deletar Filtro
+              X
             </button>
           </div>
         ))

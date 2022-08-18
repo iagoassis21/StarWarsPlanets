@@ -5,11 +5,13 @@ import ActiveFilters from './components/ActiveFilters';
 import Table from './components/Table';
 import TripleFilter from './components/TripleFilter';
 import Provider from './context/Provider';
+import Order from './components/Order';
 
 function App() {
   return (
     <Provider>
       <TripleFilter />
+      <Order />
       <ActiveFilters />
       <FilterName />
       <Table />

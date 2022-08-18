@@ -7,6 +7,8 @@ function Provider({ children }) {
   const [data, setData] = useState([]);
   const [findPlanet, setPlanet] = useState('');
   const [filterByNumericValues, setFilterByNumericValues] = useState([]);
+  const [order, setOrder] = useState({});
+
   useEffect(() => {
     const getPlanets = async () => {
       const results = await FetchApi();
@@ -23,6 +25,8 @@ function Provider({ children }) {
     },
     filterByNumericValues,
     setFilterByNumericValues,
+    order,
+    setOrder,
   };
 
   return (

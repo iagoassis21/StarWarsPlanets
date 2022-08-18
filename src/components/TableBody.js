@@ -3,7 +3,7 @@ import Context from '../context/Context';
 
 function TableBody() {
   const { data, filterByName: { name: findPlanet },
-    filterByNumericValues,
+    filterByNumericValues, order,
   } = useContext(Context);
 
   const filteredPlanets = data.filter((planet) => planet.name.toLowerCase()
@@ -18,10 +18,26 @@ function TableBody() {
       return +column[beckenbowers.column] === +beckenbowers.value;
     }));
 
+  const sorted = Object.keys(order).length === 0
+    ? filteredPlanets
+    : filteredPlanets
+      .sort((a) => {
+        if (a[order.column].toString() === 'unknown') {
+          return 1;
+        }
+        return +'-1';
+      })
+      .sort((a, b) => {
+        if (order.sort === 'ASC') {
+          return a[order.column] - b[order.column];
+        }
+        return b[order.column] - a[order.column];
+      });
+
   return (
     <tbody>
       {
-        filteredPlanets.map(({ name,
+        sorted.map(({ name,
           rotation_period: rotationPeriod,
           orbital_period: orbitalPeriod,
           diameter,
@@ -36,7 +52,7 @@ function TableBody() {
           url,
         }) => (
           <tr key={ name }>
-            <td>{name}</td>
+            <td data-testid="planet-name">{name}</td>
             <td>{rotationPeriod}</td>
             <td>{orbitalPeriod}</td>
             <td>{diameter}</td>
